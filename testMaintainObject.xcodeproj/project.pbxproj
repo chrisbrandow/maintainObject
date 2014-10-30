@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4320817F1A003FEC00D492D8 /* maintainLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4320817E1A003FEC00D492D8 /* maintainLabel.m */; };
+		436696101A02156F002A96CF /* aViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4366960F1A02156F002A96CF /* aViewModel.m */; };
 		4385D72D19F0BB1C00546A65 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4385D72C19F0BB1C00546A65 /* main.m */; };
 		4385D73019F0BB1C00546A65 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4385D72F19F0BB1C00546A65 /* AppDelegate.m */; };
 		4385D73319F0BB1C00546A65 /* testMaintainObject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4385D73119F0BB1C00546A65 /* testMaintainObject.xcdatamodeld */; };
@@ -32,6 +33,8 @@
 /* Begin PBXFileReference section */
 		4320817D1A003FEC00D492D8 /* maintainLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = maintainLabel.h; sourceTree = "<group>"; };
 		4320817E1A003FEC00D492D8 /* maintainLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = maintainLabel.m; sourceTree = "<group>"; };
+		4366960E1A02156F002A96CF /* aViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aViewModel.h; sourceTree = "<group>"; };
+		4366960F1A02156F002A96CF /* aViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aViewModel.m; sourceTree = "<group>"; };
 		4385D72719F0BB1C00546A65 /* testMaintainObject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testMaintainObject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4385D72B19F0BB1C00546A65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4385D72C19F0BB1C00546A65 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -89,6 +92,8 @@
 		4385D72919F0BB1C00546A65 /* testMaintainObject */ = {
 			isa = PBXGroup;
 			children = (
+				4366960E1A02156F002A96CF /* aViewModel.h */,
+				4366960F1A02156F002A96CF /* aViewModel.m */,
 				4385D75319F0BB4D00546A65 /* maintainObject.h */,
 				4385D75419F0BB4D00546A65 /* maintainObject.m */,
 				4385D72E19F0BB1C00546A65 /* AppDelegate.h */,
@@ -236,6 +241,7 @@
 				4320817F1A003FEC00D492D8 /* maintainLabel.m in Sources */,
 				4385D73019F0BB1C00546A65 /* AppDelegate.m in Sources */,
 				4385D73619F0BB1C00546A65 /* ViewController.m in Sources */,
+				436696101A02156F002A96CF /* aViewModel.m in Sources */,
 				4385D75519F0BB4D00546A65 /* maintainObject.m in Sources */,
 				4385D72D19F0BB1C00546A65 /* main.m in Sources */,
 			);

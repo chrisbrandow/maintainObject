@@ -13,16 +13,17 @@
 
 }
 
-- (void)withOwner:(id)weaklyHeldOwner maintain:(void (^)(id owner, id objValue, id secObjValue, maintainObject *model))maintenanceBlock;
-- (void)withOwner:(id)weaklyHeldOwner maintainWithModel:(void (^)(id owner, maintainObject *model))maintenanceBlock;
+- (void)withOwner:(id)weaklyHeldOwner maintainWithModel:(void (^)(id owner, id model))maintenanceBlock;
 
 - (void)setModelObjectValue:(double)dParameter;
 - (void)setModelSecondObjectValue:(NSString *)string;
+- (void)callTheBlock;
 
 @property (nonatomic, readonly) double objectValue;
-@property (nonatomic, readonly) NSString *secondObjectValue;
+@property (nonatomic, setter=setTheSecond:) NSString *secondObjectValue;
 
-@property (nonatomic, readonly) NSInteger thirdObjectValue;
+
+@property (nonatomic, setter=setModelInteger:) NSInteger integerProperty;
 
 
 @end
