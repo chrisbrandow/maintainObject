@@ -18,6 +18,9 @@
 		4385D73E19F0BB1C00546A65 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4385D73C19F0BB1C00546A65 /* LaunchScreen.xib */; };
 		4385D74A19F0BB1D00546A65 /* testMaintainObjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4385D74919F0BB1D00546A65 /* testMaintainObjectTests.m */; };
 		4385D75519F0BB4D00546A65 /* maintainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4385D75419F0BB4D00546A65 /* maintainObject.m */; };
+		438EBAB71A02EEE900949C6B /* blueViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 438EBAB61A02EEE900949C6B /* blueViewModel.m */; };
+		438EBABA1A02EEFC00949C6B /* radiusSliderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 438EBAB91A02EEFC00949C6B /* radiusSliderModel.m */; };
+		438EBABD1A02EF0700949C6B /* cornerRadiusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 438EBABC1A02EF0700949C6B /* cornerRadiusModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,12 @@
 		4385D74919F0BB1D00546A65 /* testMaintainObjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = testMaintainObjectTests.m; sourceTree = "<group>"; };
 		4385D75319F0BB4D00546A65 /* maintainObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = maintainObject.h; path = ../maintainObject.h; sourceTree = "<group>"; };
 		4385D75419F0BB4D00546A65 /* maintainObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = maintainObject.m; path = ../maintainObject.m; sourceTree = "<group>"; };
+		438EBAB51A02EEE900949C6B /* blueViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blueViewModel.h; sourceTree = "<group>"; };
+		438EBAB61A02EEE900949C6B /* blueViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = blueViewModel.m; sourceTree = "<group>"; };
+		438EBAB81A02EEFC00949C6B /* radiusSliderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = radiusSliderModel.h; sourceTree = "<group>"; };
+		438EBAB91A02EEFC00949C6B /* radiusSliderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = radiusSliderModel.m; sourceTree = "<group>"; };
+		438EBABB1A02EF0700949C6B /* cornerRadiusModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cornerRadiusModel.h; sourceTree = "<group>"; };
+		438EBABC1A02EF0700949C6B /* cornerRadiusModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cornerRadiusModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +116,12 @@
 				4385D73C19F0BB1C00546A65 /* LaunchScreen.xib */,
 				4385D73119F0BB1C00546A65 /* testMaintainObject.xcdatamodeld */,
 				4385D72A19F0BB1C00546A65 /* Supporting Files */,
+				438EBAB51A02EEE900949C6B /* blueViewModel.h */,
+				438EBAB61A02EEE900949C6B /* blueViewModel.m */,
+				438EBAB81A02EEFC00949C6B /* radiusSliderModel.h */,
+				438EBAB91A02EEFC00949C6B /* radiusSliderModel.m */,
+				438EBABB1A02EF0700949C6B /* cornerRadiusModel.h */,
+				438EBABC1A02EF0700949C6B /* cornerRadiusModel.m */,
 			);
 			path = testMaintainObject;
 			sourceTree = "<group>";
@@ -237,12 +252,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				438EBABD1A02EF0700949C6B /* cornerRadiusModel.m in Sources */,
 				4385D73319F0BB1C00546A65 /* testMaintainObject.xcdatamodeld in Sources */,
 				4320817F1A003FEC00D492D8 /* maintainLabel.m in Sources */,
+				438EBABA1A02EEFC00949C6B /* radiusSliderModel.m in Sources */,
 				4385D73019F0BB1C00546A65 /* AppDelegate.m in Sources */,
 				4385D73619F0BB1C00546A65 /* ViewController.m in Sources */,
 				436696101A02156F002A96CF /* aViewModel.m in Sources */,
 				4385D75519F0BB4D00546A65 /* maintainObject.m in Sources */,
+				438EBAB71A02EEE900949C6B /* blueViewModel.m in Sources */,
 				4385D72D19F0BB1C00546A65 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -21,6 +21,9 @@
 @property (weak, nonatomic) IBOutlet UISlider *radiusSlider;
 @property (weak, nonatomic) IBOutlet UISlider *cornerRadiusSlider;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *colorSegmentedControl;
+//What I would like to show would be that as overall radius changes,
+//the scale of radiusslider changes  AND if the radius gets to be < cornerradius/2
+//that cornerradius autoscales down (in the model then the view)
 
 
 @end
