@@ -15,4 +15,8 @@
 @property (nonatomic) NSString *secondObjectValue;
 @property (nonatomic) NSInteger integerProperty;
 
+@property (nonatomic) CGFloat radius;
+@property (nonatomic) UIColor *color;
+@property (nonatomic) CGFloat borderRadius;
+
 @end

@@ -16,6 +16,13 @@
 @property (nonatomic) aViewModel *test;
 @property (weak, nonatomic) IBOutlet maintainLabel *myOtherLabel;
 @property (weak, nonatomic) IBOutlet maintainLabel *myLabel;
+
+@property (weak, nonatomic) IBOutlet UIView *demoView;
+@property (weak, nonatomic) IBOutlet UISlider *radiusSlider;
+@property (weak, nonatomic) IBOutlet UISlider *cornerRadiusSlider;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *colorSegmentedControl;
+
+
 @end
 
 @implementation ViewController
@@ -72,6 +79,12 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (IBAction)firstSliderUpdated:(id)sender {
+}
+- (IBAction)secondSliderUpdated:(id)sender {
+}
+- (IBAction)segmentedControllerUpdated:(id)sender {
 }
 
 @end
