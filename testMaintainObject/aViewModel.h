@@ -10,6 +10,9 @@
 #import "maintainObject.h"
 @interface aViewModel : maintainObject
 
-@property (nonatomic, setter=setMyModelInteger:) NSInteger myIntegerProperty;
+@property (nonatomic) NSInteger myIntegerProperty;
+@property (nonatomic) double objectValue;
+@property (nonatomic) NSString *secondObjectValue;
+@property (nonatomic) NSInteger integerProperty;
 
 @end

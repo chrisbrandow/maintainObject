@@ -14,7 +14,7 @@
 
 
 
-    [object withOwner:self maintainWithModel:^(id owner, maintainObject *model) {
+    [object withOwner:self maintainWithModel:^(id owner, aViewModel *model) {
 
         maintainLabel *l = (maintainLabel *)owner;
         [l setText:[NSString stringWithFormat:@"%.1f hello %zd", model.objectValue, model.integerProperty ]];

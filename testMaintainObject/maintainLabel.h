@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "maintainObject.h"
+#import "aViewModel.h"
 @interface maintainLabel : UILabel
 
 - (void)configureWithModel:(maintainObject *)object;

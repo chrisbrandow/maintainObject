@@ -17,13 +17,8 @@
 
 - (void)setModelObjectValue:(double)dParameter;
 - (void)setModelSecondObjectValue:(NSString *)string;
-- (void)callTheBlock;
-
-@property (nonatomic, readonly) double objectValue;
-@property (nonatomic, setter=setTheSecond:) NSString *secondObjectValue;
 
 
-@property (nonatomic, setter=setModelInteger:) NSInteger integerProperty;
 
 
 @end
