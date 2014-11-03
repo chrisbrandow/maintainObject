@@ -22,34 +22,26 @@
         _maintenanceBlocksByOwner = [NSMapTable weakToStrongObjectsMapTable];
     }
 
-    NSLog(@"init object");
-
     return self;
 }
 
 - (void)withOwner:(id)weaklyHeldOwner maintainWithModel:(void (^)(id owner, id model))maintenanceBlock {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, weaklyHeldOwner);
-    NSLog(@"address %zd", _maintenanceBlocksByOwner);
     NSMutableArray *maintenanceBlocksForOwner = [_maintenanceBlocksByOwner objectForKey:weaklyHeldOwner];
-    NSLog(@"man %@", maintenanceBlocksForOwner);
     if (!maintenanceBlocksForOwner) {
         maintenanceBlocksForOwner = [NSMutableArray array];
         [_maintenanceBlocksByOwner setObject:maintenanceBlocksForOwner forKey:weaklyHeldOwner];
     }
-    NSLog(@"man2 %@", maintenanceBlocksForOwner);
 
-//    __weak id weakSelf = self;
+    __weak id weakSelf = self;
     [maintenanceBlocksForOwner addObject:maintenanceBlock];
-    NSLog(@"man2 %@", maintenanceBlocksForOwner);
 
-    NSLog(@"owner keys: %@", [[_maintenanceBlocksByOwner keyEnumerator] allObjects]);
+//    NSLog(@"owner keys: %@", [[_maintenanceBlocksByOwner keyEnumerator] allObjects]);
 
     
-    maintenanceBlock(weaklyHeldOwner, self);
+    maintenanceBlock(weaklyHeldOwner, weakSelf);
 }
 
 - (void)callTheBlock {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, _maintenanceBlocksByOwner);
     
     for (id owner in _maintenanceBlocksByOwner) {
         

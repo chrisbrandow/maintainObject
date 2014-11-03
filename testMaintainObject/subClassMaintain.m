@@ -9,6 +9,9 @@
 #import "subClassMaintain.h"
 
 @implementation subClassMaintain
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+
 
 - (void)setThirdProp:(double)thirdProp {
     if (_thirdProp != thirdProp) {
@@ -31,5 +34,5 @@
     }
 }
 
-
+#pragma clang diagnostic pop
 @end
