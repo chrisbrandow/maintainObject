@@ -48,24 +48,6 @@
     maintenanceBlock(weaklyHeldOwner, self);
 }
 
-- (void)setFirstProp:(double)firstProp {
-    if (_firstProp != firstProp) {
-        _firstProp = firstProp;
-        _firstProp = [self firstProp];
-        [self callTheBlock];
-    }
-}
-
-- (void)setSecondProp:(NSString *)secondProp {
-
-    if (![_secondProp isEqual:secondProp]) {
-
-        _secondProp = secondProp;
-        _secondProp = [self secondProp];
-        [self callTheBlock];
-    }
-}
-
 - (void)callTheBlock {
     NSLog(@"%s %@", __PRETTY_FUNCTION__, _maintenanceBlocksByOwner);
     

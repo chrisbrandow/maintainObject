@@ -59,7 +59,7 @@
                                     <action selector="cornerRadiusSliderUpdated:" destination="vXZ-lx-hvc" eventType="valueChanged" id="J3W-H0-Bjn"/>
                                 </connections>
                             </slider>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="200" minValue="100" maxValue="300" translatesAutoresizingMaskIntoConstraints="NO" id="EoH-hY-vY5" customClass="radiusSlider">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="EoH-hY-vY5" customClass="radiusSlider">
                                 <rect key="frame" x="24" y="372" width="552" height="31"/>
                                 <connections>
                                     <action selector="radiusSliderUpdated:" destination="vXZ-lx-hvc" eventType="valueChanged" id="Pj1-bs-0oz"/>

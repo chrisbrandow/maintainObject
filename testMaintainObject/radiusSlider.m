@@ -15,16 +15,11 @@
     
     
     [modelObject withOwner:self maintainWithModel:^(id owner, radiusSliderModel *model) {
-        NSLog(@"%s", __PRETTY_FUNCTION__);
+        NSLog(@"hello 3rd block");
 
         radiusSlider *s = (radiusSlider *)owner;
-//        s.value = model.currentValue;
-        NSLog(@"max: %.1f", model.maxValue);
-        NSLog(@"current: %.1f", model.currentValue);
 
-        [s setMaximumValue:model.maxValue];
-    
-        NSLog(@"s.val %.1f", s.maximumValue);
+        s.tintColor = [UIColor colorWithWhite:(.1+.9*(model.currentValue/.9)) alpha:1];
 
     }];
 }
