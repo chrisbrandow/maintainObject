@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -30,12 +31,6 @@
                                     <action selector="buttonAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="hsI-jn-2zm"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DSE-nf-6D0" customClass="maintainLabel">
-                                <rect key="frame" x="33" y="266" width="162" height="52"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="a1s-hd-GUF">
                                 <rect key="frame" x="26" y="492" width="548" height="29"/>
                                 <segments>
@@ -50,28 +45,26 @@
                                     <action selector="segmentedControllerUpdated:" destination="vXZ-lx-hvc" eventType="valueChanged" id="eHr-9F-92z"/>
                                 </connections>
                             </segmentedControl>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a64-K5-d0j">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a64-K5-d0j" customClass="blueView">
                                 <rect key="frame" x="200" y="62" width="200" height="200"/>
                                 <color key="backgroundColor" red="0.20407006050000001" green="0.2454637097" blue="0.54051159270000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="5iC-gh-sCj"/>
+                                    <constraint firstAttribute="width" secondItem="a64-K5-d0j" secondAttribute="height" multiplier="1:1" id="J4i-ia-MXH"/>
+                                </constraints>
                             </view>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="C2a-ix-daR">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="150" minValue="0.0" maxValue="150" translatesAutoresizingMaskIntoConstraints="NO" id="C2a-ix-daR" customClass="cRadiusSlider">
                                 <rect key="frame" x="24" y="432" width="552" height="31"/>
                                 <connections>
-                                    <action selector="secondSliderUpdated:" destination="vXZ-lx-hvc" eventType="valueChanged" id="cn9-Wn-tRT"/>
+                                    <action selector="cornerRadiusSliderUpdated:" destination="vXZ-lx-hvc" eventType="valueChanged" id="J3W-H0-Bjn"/>
                                 </connections>
                             </slider>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="EoH-hY-vY5">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="200" minValue="100" maxValue="300" translatesAutoresizingMaskIntoConstraints="NO" id="EoH-hY-vY5" customClass="radiusSlider">
                                 <rect key="frame" x="24" y="372" width="552" height="31"/>
                                 <connections>
-                                    <action selector="firstSliderUpdated:" destination="vXZ-lx-hvc" eventType="valueChanged" id="Z4M-Jd-tDH"/>
+                                    <action selector="radiusSliderUpdated:" destination="vXZ-lx-hvc" eventType="valueChanged" id="Pj1-bs-0oz"/>
                                 </connections>
                             </slider>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xv0-XU-8ML" customClass="maintainLabel">
-                                <rect key="frame" x="0.0" y="218" width="162" height="52"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -86,7 +79,7 @@
                             <constraint firstItem="EoH-hY-vY5" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="10" id="hx4-Av-68B"/>
                             <constraint firstItem="a1s-hd-GUF" firstAttribute="top" secondItem="C2a-ix-daR" secondAttribute="bottom" constant="30" id="ksx-e7-Rh2"/>
                             <constraint firstAttribute="centerX" secondItem="2qp-fj-as4" secondAttribute="centerX" id="rcw-cP-swP"/>
-                            <constraint firstAttribute="centerX" secondItem="a64-K5-d0j" secondAttribute="centerX" placeholder="YES" id="tuU-8X-EKx"/>
+                            <constraint firstAttribute="centerX" secondItem="a64-K5-d0j" secondAttribute="centerX" id="tuU-8X-EKx"/>
                         </constraints>
                     </view>
                     <connections>
@@ -94,9 +87,8 @@
                         <outlet property="colorSegmentedControl" destination="a1s-hd-GUF" id="Sbu-P7-FGi"/>
                         <outlet property="cornerRadiusSlider" destination="C2a-ix-daR" id="mhL-Wy-BIr"/>
                         <outlet property="demoView" destination="a64-K5-d0j" id="f62-Kq-S1W"/>
-                        <outlet property="myLabel" destination="DSE-nf-6D0" id="nq1-1t-YPB"/>
-                        <outlet property="myOtherLabel" destination="xv0-XU-8ML" id="75h-gs-PCc"/>
                         <outlet property="radiusSlider" destination="EoH-hY-vY5" id="d0w-sn-PjQ"/>
+                        <outlet property="viewWidthConstraint" destination="5iC-gh-sCj" id="m5U-y6-Zfn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

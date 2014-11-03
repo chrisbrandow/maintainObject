@@ -6,7 +6,8 @@
 //  Copyright (c) 2014 Flouu Apps. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
+@import UIKit;
 
 @interface maintainObject : NSObject {
     NSMapTable *_maintenanceBlocksByOwner;

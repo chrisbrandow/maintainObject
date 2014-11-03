@@ -7,7 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+@import UIKit;
+#import "maintainObject.h"
 
-@interface blueViewModel : NSObject
+@interface blueViewModel : maintainObject
+
+@property (nonatomic) CGFloat vmCornerRadius;
+@property (nonatomic) CGFloat vmRadius;
+@property (nonatomic) UIColor *vmColor;
 
 @end

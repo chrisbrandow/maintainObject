@@ -7,7 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "maintainObject.h"
 
-@interface cornerRadiusModel : NSObject
+@import UIKit;
+
+@interface cornerRadiusModel : maintainObject
+
+@property (nonatomic) CGFloat maxValue;
+@property (nonatomic) CGFloat currentValue;
 
 @end

@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "maintainObject.h"
 
-@interface radiusSliderModel : NSObject
+@interface radiusSliderModel : maintainObject
+
+@property (nonatomic) CGFloat maxValue;
+@property (nonatomic) CGFloat minValue;
+@property (nonatomic) CGFloat currentValue;
 
 @end

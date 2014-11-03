@@ -18,6 +18,7 @@
 
         maintainLabel *l = (maintainLabel *)owner;
         [l setText:[NSString stringWithFormat:@"%.1f hello %zd", model.objectValue, model.integerProperty ]];
+        
     }];
 }
 

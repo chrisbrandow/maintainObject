@@ -10,84 +10,100 @@
 #import "maintainObject.h"
 #import "maintainLabel.h"
 #import "aViewModel.h"
+#import "cornerRadiusModel.h"
+#import "radiusSliderModel.h"
+#import "cRadiusSlider.h"
+#import "radiusSlider.h"
+#import "blueViewModel.h"
+#import "blueView.h"
+
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *button;
-@property (nonatomic) aViewModel *mObj;
-@property (nonatomic) aViewModel *test;
-@property (weak, nonatomic) IBOutlet maintainLabel *myOtherLabel;
-@property (weak, nonatomic) IBOutlet maintainLabel *myLabel;
 
-@property (weak, nonatomic) IBOutlet UIView *demoView;
-@property (weak, nonatomic) IBOutlet UISlider *radiusSlider;
-@property (weak, nonatomic) IBOutlet UISlider *cornerRadiusSlider;
+@property (nonatomic) radiusSliderModel *radiusSliderVM;
+@property (nonatomic) cornerRadiusModel *cornerRadiusSliderVM;
+
+@property (weak, nonatomic) IBOutlet blueView *demoView;
+@property ( nonatomic) blueViewModel *demoViewModel;
+@property (weak, nonatomic) IBOutlet radiusSlider *radiusSlider;
+@property (weak, nonatomic) IBOutlet cRadiusSlider *cornerRadiusSlider;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *colorSegmentedControl;
 //What I would like to show would be that as overall radius changes,
 //the scale of radiusslider changes  AND if the radius gets to be < cornerradius/2
 //that cornerradius autoscales down (in the model then the view)
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewWidthConstraint;
 
 @end
 
 @implementation ViewController
 - (IBAction)buttonAction:(id)sender {
 
-    [self.mObj setIntegerProperty:32];
-    [self.mObj setSecondObjectValue:@"universe"];
-    [self.test setMyIntegerProperty:198];
-
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.mObj = [[aViewModel alloc] init];
-    self.test = [[aViewModel alloc] init];
     
-    __block NSInteger aNumber = 5;
-    NSLog(@"anumber %zd",aNumber);
+    self.demoViewModel = [[blueViewModel alloc] init];
+    self.demoView.widthConstraint = self.viewWidthConstraint;
+    self.demoViewModel.vmColor = [UIColor greenColor];
+    
+    
+    self.radiusSliderVM = [[radiusSliderModel alloc] init];
+    
+    
+    self.cornerRadiusSliderVM = [[cornerRadiusModel alloc] init];
 
-    [self.test withOwner:self maintainWithModel:^(id owner, aViewModel *model) {
-        NSLog(@"self.test block####");
-
-        NSLog(@"se;f.mobj block####");
+    //[thingThatsChanging withOwner:thingThatNeedsToChangeWithIt
+    [self.radiusSliderVM withOwner:self.demoViewModel maintainWithModel:^(id owner, id model) {
+        [owner setVmRadius:[model currentValue]];
         
-        aNumber = model.myIntegerProperty;
-        NSString *temp = [[owner myLabel] text];
-        temp = [temp stringByAppendingString:[NSString stringWithFormat:@"%zd", model.myIntegerProperty]];
-        [[owner myLabel] setText:temp];
-        NSLog(@"temp: %@", temp);
     }];
-    self.test.myIntegerProperty = 57;
-    NSLog(@"anumber %zd",aNumber);
-
     
-    [self.mObj setObjectValue:4.3];
-    [self.mObj setSecondObjectValue:@"le la la"];
-//    [self.myLabel configureWithModel:self.mObj];
-    
-    [self.mObj withOwner:self maintainWithModel:^(id owner, aViewModel *model) {
-        NSLog(@"se;f.mobj block####");
-
-        ViewController *vc = (ViewController *)owner;
-        [[vc myOtherLabel] setText:[NSString stringWithFormat:@"->%@", model.secondObjectValue]];
+    [self.radiusSliderVM withOwner:self.cornerRadiusSliderVM maintainWithModel:^(id owner, id model) {
+        NSLog(@"hello 2nd block");
+        [owner setMaxValue:[model currentValue]/2];
     }];
-    [self.mObj setSecondObjectValue:@"la la la"];
-
-
-//    [self.myOtherLabel configureWithModel:self.mObj];
     
-    // Do any additional setup after loading the view, typically from a nib.
+    [self.demoView configureWithModel:self.demoViewModel];
+    [self.radiusSlider configureWithModel:self.radiusSliderVM];
+    [self.cornerRadiusSlider configureWithModel:self.cornerRadiusSliderVM];
+    self.demoViewModel.vmRadius = 200;
+    self.radiusSliderVM.maxValue = 300;
+
+
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)firstSliderUpdated:(id)sender {
+- (IBAction)radiusSliderUpdated:(id)sender {
+    UISlider *s = (UISlider *)sender;
+    self.demoViewModel.vmRadius = s.value;
+//    self.viewWidthConstraint.constant = s.value;
+    NSLog(@"self cRMax: %.1f", self.cornerRadiusSlider.maximumValue);
+
 }
-- (IBAction)secondSliderUpdated:(id)sender {
+- (IBAction)cornerRadiusSliderUpdated:(id)sender {
+
+    UISlider *s = (UISlider *)sender;
+    NSLog(@"valval %.1f", s.value);
+//    self.demoViewModel.vmCornerRadius = s.value;
+//    self.radiusSliderVM.maxValue = s.value;
+//finish setting the models
+    CGFloat rsvmMax = self.radiusSliderVM.maxValue;
+    CGFloat rsvmCurrent = self.radiusSliderVM.currentValue;
+    //if the corner radius < current radius value then
+    // set current radius = current corner radius.
+    // otherwise leave it alone;
+    
+
 }
+
 - (IBAction)segmentedControllerUpdated:(id)sender {
+    
 }
 
 @end
