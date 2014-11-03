@@ -12,6 +12,7 @@
 		437E98991A0306C4000491ED /* radiusSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 437E98981A0306C4000491ED /* radiusSlider.m */; };
 		437E989C1A0378F8000491ED /* blueView.m in Sources */ = {isa = PBXBuildFile; fileRef = 437E989B1A0378F8000491ED /* blueView.m */; };
 		437E989F1A075C57000491ED /* cRadiusSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 437E989E1A075C57000491ED /* cRadiusSlider.m */; };
+		437E98A21A07E5A4000491ED /* subClassMaintain.m in Sources */ = {isa = PBXBuildFile; fileRef = 437E98A11A07E5A4000491ED /* subClassMaintain.m */; };
 		4385D72D19F0BB1C00546A65 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4385D72C19F0BB1C00546A65 /* main.m */; };
 		4385D73019F0BB1C00546A65 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4385D72F19F0BB1C00546A65 /* AppDelegate.m */; };
 		4385D73319F0BB1C00546A65 /* testMaintainObject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4385D73119F0BB1C00546A65 /* testMaintainObject.xcdatamodeld */; };
@@ -47,6 +48,8 @@
 		437E989B1A0378F8000491ED /* blueView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = blueView.m; sourceTree = "<group>"; };
 		437E989D1A075C57000491ED /* cRadiusSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cRadiusSlider.h; sourceTree = "<group>"; };
 		437E989E1A075C57000491ED /* cRadiusSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cRadiusSlider.m; sourceTree = "<group>"; };
+		437E98A01A07E5A4000491ED /* subClassMaintain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = subClassMaintain.h; sourceTree = "<group>"; };
+		437E98A11A07E5A4000491ED /* subClassMaintain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = subClassMaintain.m; sourceTree = "<group>"; };
 		4385D72719F0BB1C00546A65 /* testMaintainObject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testMaintainObject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4385D72B19F0BB1C00546A65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4385D72C19F0BB1C00546A65 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -114,6 +117,8 @@
 				4366960F1A02156F002A96CF /* aViewModel.m */,
 				4385D75319F0BB4D00546A65 /* maintainObject.h */,
 				4385D75419F0BB4D00546A65 /* maintainObject.m */,
+				437E98A01A07E5A4000491ED /* subClassMaintain.h */,
+				437E98A11A07E5A4000491ED /* subClassMaintain.m */,
 				4385D72E19F0BB1C00546A65 /* AppDelegate.h */,
 				4385D72F19F0BB1C00546A65 /* AppDelegate.m */,
 				4385D73419F0BB1C00546A65 /* ViewController.h */,
@@ -277,6 +282,7 @@
 				4385D73019F0BB1C00546A65 /* AppDelegate.m in Sources */,
 				4385D73619F0BB1C00546A65 /* ViewController.m in Sources */,
 				436696101A02156F002A96CF /* aViewModel.m in Sources */,
+				437E98A21A07E5A4000491ED /* subClassMaintain.m in Sources */,
 				4385D75519F0BB4D00546A65 /* maintainObject.m in Sources */,
 				438EBAB71A02EEE900949C6B /* blueViewModel.m in Sources */,
 				4385D72D19F0BB1C00546A65 /* main.m in Sources */,

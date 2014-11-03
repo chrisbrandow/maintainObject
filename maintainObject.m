@@ -42,25 +42,33 @@
     [maintenanceBlocksForOwner addObject:maintenanceBlock];
     NSLog(@"man2 %@", maintenanceBlocksForOwner);
 
+    NSLog(@"owner keys: %@", [[_maintenanceBlocksByOwner keyEnumerator] allObjects]);
+
     
     maintenanceBlock(weaklyHeldOwner, self);
 }
 
-//- (void)setObjectValue:(id)objectValue {
-//    
-//    if (![_objectValue isEqual:objectValue]) {
-//        _objectValue = objectValue;
-//        objectValue = [self objectValue];
-//        for (id owner in _maintenanceBlocksByOwner) {
-//            for (void (^maintenanceBlock)(id owner, id objValue) in [_maintenanceBlocksByOwner objectForKey:owner]) {
-//                maintenanceBlock(owner, objectValue);
-//            }
-//        }
-//    }
-//}
+- (void)setFirstProp:(double)firstProp {
+    if (_firstProp != firstProp) {
+        _firstProp = firstProp;
+        _firstProp = [self firstProp];
+        [self callTheBlock];
+    }
+}
+
+- (void)setSecondProp:(NSString *)secondProp {
+
+    if (![_secondProp isEqual:secondProp]) {
+
+        _secondProp = secondProp;
+        _secondProp = [self secondProp];
+        [self callTheBlock];
+    }
+}
+
 - (void)callTheBlock {
     NSLog(@"%s %@", __PRETTY_FUNCTION__, _maintenanceBlocksByOwner);
-
+    
     for (id owner in _maintenanceBlocksByOwner) {
         
         for (void (^maintenanceBlock)(id owner, id model) in

@@ -53,7 +53,7 @@
                                     <constraint firstAttribute="width" secondItem="a64-K5-d0j" secondAttribute="height" multiplier="1:1" id="J4i-ia-MXH"/>
                                 </constraints>
                             </view>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="150" minValue="0.0" maxValue="150" translatesAutoresizingMaskIntoConstraints="NO" id="C2a-ix-daR" customClass="cRadiusSlider">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="0.0" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="C2a-ix-daR" customClass="cRadiusSlider">
                                 <rect key="frame" x="24" y="432" width="552" height="31"/>
                                 <connections>
                                     <action selector="cornerRadiusSliderUpdated:" destination="vXZ-lx-hvc" eventType="valueChanged" id="J3W-H0-Bjn"/>

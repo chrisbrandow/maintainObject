@@ -16,8 +16,8 @@
 
 - (void)withOwner:(id)weaklyHeldOwner maintainWithModel:(void (^)(id owner, id model))maintenanceBlock;
 
-- (void)setModelObjectValue:(double)dParameter;
-- (void)setModelSecondObjectValue:(NSString *)string;
+@property (nonatomic) double firstProp;
+@property (nonatomic) NSString *secondProp;
 
 
 
