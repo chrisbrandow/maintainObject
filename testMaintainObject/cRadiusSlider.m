@@ -10,12 +10,12 @@
 
 @implementation cRadiusSlider
 
-- (void)configureWithModel:(cornerRadiusModel *)modelObject {
+- (void)configureWithModel:(radiusSliderModel *)modelObject {
     
     
     
     [modelObject withOwner:self maintainWithModel:^(id owner, id model) {
-        cornerRadiusModel *m = model;
+        radiusSliderModel *m = model;
         NSLog(@"cRadius config block: %.1f", m.maxValue);
         cRadiusSlider *s = (cRadiusSlider *)owner;
 

@@ -11,7 +11,7 @@
 
 @interface blueView : UIView
 
-@property (nonatomic) NSLayoutConstraint *widthConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *widthConstraint;
 
 - (void)configureWithModel:(blueViewModel *)modelObject;
 

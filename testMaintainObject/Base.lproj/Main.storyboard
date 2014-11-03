@@ -52,8 +52,11 @@
                                     <constraint firstAttribute="width" constant="200" id="5iC-gh-sCj"/>
                                     <constraint firstAttribute="width" secondItem="a64-K5-d0j" secondAttribute="height" multiplier="1:1" id="J4i-ia-MXH"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="widthConstraint" destination="5iC-gh-sCj" id="YfK-GP-JAP"/>
+                                </connections>
                             </view>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="0.0" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="C2a-ix-daR" customClass="cRadiusSlider">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="0.0" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="C2a-ix-daR" customClass="radiusSlider">
                                 <rect key="frame" x="24" y="432" width="552" height="31"/>
                                 <connections>
                                     <action selector="cornerRadiusSliderUpdated:" destination="vXZ-lx-hvc" eventType="valueChanged" id="J3W-H0-Bjn"/>
@@ -88,7 +91,6 @@
                         <outlet property="cornerRadiusSlider" destination="C2a-ix-daR" id="mhL-Wy-BIr"/>
                         <outlet property="demoView" destination="a64-K5-d0j" id="f62-Kq-S1W"/>
                         <outlet property="radiusSlider" destination="EoH-hY-vY5" id="d0w-sn-PjQ"/>
-                        <outlet property="viewWidthConstraint" destination="5iC-gh-sCj" id="m5U-y6-Zfn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

@@ -12,17 +12,18 @@
 @implementation blueView
 
 - (void)configureWithModel:(blueViewModel *)modelObject {
+    
+    modelObject.vmRadius = self.widthConstraint.constant;
+    modelObject.vmColor = self.backgroundColor;
+    modelObject.vmCornerRadius = self.layer.cornerRadius;
+    
     [modelObject withOwner:self maintainWithModel:^(id owner, id model) {
-        NSLog(@"%s", __PRETTY_FUNCTION__);
         blueViewModel *vm = model;
         blueView *v = (blueView *)owner;
         
         v.layer.cornerRadius = vm.vmCornerRadius;
         v.widthConstraint.constant = vm.vmRadius;
         v.backgroundColor = vm.vmColor;
-        NSLog(@"width: %.1f", v.widthConstraint.constant);
-
-        [self setNeedsUpdateConstraints];
     }];
 }
 

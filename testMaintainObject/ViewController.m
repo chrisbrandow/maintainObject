@@ -11,7 +11,7 @@
 #import "subClassMaintain.h"
 #import "maintainLabel.h"
 #import "aViewModel.h"
-#import "cornerRadiusModel.h"
+
 #import "radiusSliderModel.h"
 #import "cRadiusSlider.h"
 #import "radiusSlider.h"
@@ -22,7 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *button;
 
 @property (nonatomic) radiusSliderModel *radiusSliderVM;
-@property (nonatomic) cornerRadiusModel *cornerRadiusSliderVM;
+@property (nonatomic) radiusSliderModel *cornerRadiusSliderVM;
 @property (nonatomic) maintainObject *test2Blocks;
 @property (nonatomic) subClassMaintain *test3Blocks;
 
@@ -37,7 +37,7 @@
 //the scale of radiusslider changes  AND if the radius gets to be < cornerradius/2
 //that cornerradius autoscales down (in the model then the view)
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewWidthConstraint;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewWidthConstraint;
 
 @end
 
@@ -51,31 +51,39 @@
     
 
     self.radiusSliderVM = [[radiusSliderModel alloc] init];
+    self.cornerRadiusSliderVM = [[radiusSliderModel alloc] init];
+    self.demoViewModel = [[blueViewModel alloc] init];
+    
+
+    [self.demoView configureWithModel:self.demoViewModel];
 
     [self.radiusSliderVM withOwner:self maintainWithModel:^(id owner, id model) {
         NSLog(@"hello 1st block");
-
         [[owner demoViewModel] setVmRadius:100*[model currentValue]];
+        [[owner cornerRadiusSliderVM] setMaxValue:100*[model currentValue]/2];
         
     }];
     
+    [self.cornerRadiusSliderVM withOwner:self maintainWithModel:^(id owner, id model) {
+        [[owner demoViewModel] setVmCornerRadius:[model currentValue]];
+    }];
+    
+
     [self.radiusSlider configureWithModel:self.radiusSliderVM];
+    [self.cornerRadiusSlider configureWithModel:self.cornerRadiusSliderVM];
     
-    [self.radiusSliderVM withOwner:self maintainWithModel:^(id owner, id model) {
-        NSLog(@"hello 2nd block");
-        [[owner cornerRadiusSliderVM] setMaxValue:[model currentValue]/2];
-    }];
+    //cbnote: these worked in terms of beign included in the owners map table keys
+//    [self.radiusSliderVM withOwner:self maintainWithModel:^(id owner, id model) {
+//        NSLog(@"hello 2nd block");
+//        [[owner cornerRadiusSliderVM] setMaxValue:[model currentValue]/2];
+//    }];
+//    
+//    [self.radiusSliderVM withOwner:self.cornerRadiusSlider maintainWithModel:^(id owner, id model) {
+//        NSLog(@"hello 24th block");
+//        [owner setBackgroundColor:[UIColor colorWithRed:.8 green:.8 blue:[model currentValue] alpha:1]];// setMaxValue:[model currentValue]/2];
+//    }];
+
     
-    [self.radiusSliderVM withOwner:self.cornerRadiusSlider maintainWithModel:^(id owner, id model) {
-        NSLog(@"hello 24th block");
-        [owner setBackgroundColor:[UIColor colorWithRed:.8 green:.8 blue:[model currentValue] alpha:1]];// setMaxValue:[model currentValue]/2];
-    }];
-//
-//    [self.demoView configureWithModel:self.demoViewModel];
-//    [self.radiusSlider configureWithModel:self.radiusSliderVM];
-//    [self.cornerRadiusSlider configureWithModel:self.cornerRadiusSliderVM];
-//    self.demoViewModel.vmRadius = 200;
-//    self.radiusSliderVM.maxValue = 300;
 
 
 }
@@ -88,20 +96,13 @@
     UISlider *s = (UISlider *)sender;
     
     self.radiusSliderVM.currentValue = s.value;
-//    self.demoViewModel.vmRadius = s.value;
-//    self.viewWidthConstraint.constant = s.value;
-//    [self.test2Blocks setFirstProp:s.value];
-//    [self.test2Blocks setSecondProp:[NSString stringWithFormat:@"%.1f",s.value]];
-
+    
 }
 - (IBAction)cornerRadiusSliderUpdated:(id)sender {
 
     UISlider *s = (UISlider *)sender;
     NSLog(@"valval %.1f", s.value);
-
-    
-    [self.test3Blocks setThirdProp:s.value];
-    [self.test3Blocks setFourthProp:[NSString stringWithFormat:@"%.1f",s.value]];
+    self.cornerRadiusSliderVM.currentValue = s.value;
 
 
 }

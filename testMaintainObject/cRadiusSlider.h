@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "cornerRadiusModel.h"
+#import "radiusSliderModel.h"
 
 @interface cRadiusSlider : UISlider
 
-- (void)configureWithModel:(cornerRadiusModel *)modelObject;
+- (void)configureWithModel:(radiusSliderModel *)modelObject;
 
 @end
