@@ -11,7 +11,8 @@
 #import "subClassMaintain.h"
 #import "maintainLabel.h"
 #import "aViewModel.h"
-
+#import "labelVM.h"
+#import "axisLabel.h"
 #import "radiusSliderModel.h"
 #import "radiusSlider.h"
 #import "blueViewModel.h"
@@ -31,6 +32,15 @@
 
 @property (nonatomic) NSArray *colors;
 
+@property (weak, nonatomic) IBOutlet axisLabel *radiusMaxLabel;
+
+@property (weak, nonatomic) IBOutlet axisLabel *radiusMinLabel;
+@property (weak, nonatomic) IBOutlet axisLabel *cornerRadiusMinLabel;
+@property (weak, nonatomic) IBOutlet axisLabel *cornerRadiusMaxLabel;
+
+@property (nonatomic) labelVM *crMinLabelVM;
+
+
 @end
 
 @implementation ViewController
@@ -46,21 +56,34 @@
     self.radiusSliderVM = [[radiusSliderModel alloc] init];
     self.cornerRadiusSliderVM = [[radiusSliderModel alloc] init];
     self.demoViewModel = [[blueViewModel alloc] init];
+    self.crMinLabelVM = [[labelVM alloc] init];
+//    labelVM *rMinLabelVM = [[labelVM alloc] init];
     
-    [self.radiusSliderVM withOwner:self maintainWithModel:^(id owner, id model) {
-        NSLog(@"hello 1st block");
-        [[owner demoViewModel] setVmRadius:[model currentValue]];
-        [[owner cornerRadiusSliderVM] setMaxValue:[model currentValue]/2];
-        if ([owner cornerRadiusSliderVM].currentValue > [model currentValue]/2) {
-            [[owner cornerRadiusSliderVM] setCurrentValue:[model currentValue]/2];
+    
+    [self.radiusSliderVM withValueChangeUpdateObject:self.demoViewModel withBlock:^(id dependentObject, id model) {
+        [dependentObject setVmRadius:[model currentValue]];
+    }];
+    
+    [self.radiusSliderVM withValueChangeUpdateObject:self.cornerRadiusSliderVM withBlock:^(id dependentObject, id model) {
+        radiusSliderModel *crVM = (radiusSliderModel *)dependentObject;
+
+        crVM.maxValue = [model currentValue]/2;
+
+        if ([dependentObject currentValue] > [model currentValue]/2) {
+            [dependentObject setValue:@([model currentValue]/2) forKey:propertyKeyPath(currentValue)];
+            
         }
-        
     }];
     
-    [self.cornerRadiusSliderVM withOwner:self maintainWithModel:^(id owner, id model) {
-        [[owner demoViewModel] setVmCornerRadius:[model currentValue]];
+    [self.cornerRadiusSliderVM withValueChangeUpdateObject:self withBlock:^(id dependentObject, id model) {
+        [[dependentObject demoViewModel] setVmCornerRadius:[model currentValue]];
+    }];
+
+    [self.cornerRadiusSliderVM withValueChangeUpdateObject:self.crMinLabelVM withBlock:^(id dependentObject, id model) {
+        [dependentObject setVmText:[NSString stringWithFormat:@"%.0f",[model maxValue]] ];
     }];
     
+    [self.cornerRadiusMaxLabel configureWithModel:self.crMinLabelVM];
     [self.demoView configureWithModel:self.demoViewModel];
     [self.radiusSlider configureWithModel:self.radiusSliderVM];
     [self.cornerRadiusSlider configureWithModel:self.cornerRadiusSliderVM];
@@ -73,14 +96,15 @@
 }
 - (IBAction)radiusSliderUpdated:(id)sender {
     UISlider *s = (UISlider *)sender;
-    self.radiusSliderVM.currentValue = s.value;
+//    self.radiusSliderVM.currentValue = s.value;
+    [self.radiusSliderVM setValue:@(s.value) forKey:propertyKeyPath(currentValue)];
     
 }
 - (IBAction)cornerRadiusSliderUpdated:(id)sender {
 
     UISlider *s = (UISlider *)sender;
-    self.cornerRadiusSliderVM.currentValue = s.value;
-
+//    self.cornerRadiusSliderVM.currentValue = s.value;
+    [self.cornerRadiusSliderVM setValue:@(s.value) forKey:propertyKeyPath(currentValue)];
 }
 
 - (IBAction)segmentedControllerUpdated:(id)sender {

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4320817F1A003FEC00D492D8 /* maintainLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4320817E1A003FEC00D492D8 /* maintainLabel.m */; };
 		436696101A02156F002A96CF /* aViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4366960F1A02156F002A96CF /* aViewModel.m */; };
+		437A8B351A0937D8007088CB /* labelVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 437A8B341A0937D8007088CB /* labelVM.m */; };
+		437A8B381A093BC7007088CB /* axisLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 437A8B371A093BC7007088CB /* axisLabel.m */; };
 		437E98991A0306C4000491ED /* radiusSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 437E98981A0306C4000491ED /* radiusSlider.m */; };
 		437E989C1A0378F8000491ED /* blueView.m in Sources */ = {isa = PBXBuildFile; fileRef = 437E989B1A0378F8000491ED /* blueView.m */; };
 		437E98A21A07E5A4000491ED /* subClassMaintain.m in Sources */ = {isa = PBXBuildFile; fileRef = 437E98A11A07E5A4000491ED /* subClassMaintain.m */; };
@@ -40,6 +42,10 @@
 		4320817E1A003FEC00D492D8 /* maintainLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = maintainLabel.m; sourceTree = "<group>"; };
 		4366960E1A02156F002A96CF /* aViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aViewModel.h; sourceTree = "<group>"; };
 		4366960F1A02156F002A96CF /* aViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aViewModel.m; sourceTree = "<group>"; };
+		437A8B331A0937D8007088CB /* labelVM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = labelVM.h; path = ../labelVM.h; sourceTree = "<group>"; };
+		437A8B341A0937D8007088CB /* labelVM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = labelVM.m; path = ../labelVM.m; sourceTree = "<group>"; };
+		437A8B361A093BC7007088CB /* axisLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = axisLabel.h; sourceTree = "<group>"; };
+		437A8B371A093BC7007088CB /* axisLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = axisLabel.m; sourceTree = "<group>"; };
 		437E98971A0306C4000491ED /* radiusSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = radiusSlider.h; sourceTree = "<group>"; };
 		437E98981A0306C4000491ED /* radiusSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = radiusSlider.m; sourceTree = "<group>"; };
 		437E989A1A0378F8000491ED /* blueView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blueView.h; sourceTree = "<group>"; };
@@ -119,11 +125,15 @@
 				4385D73419F0BB1C00546A65 /* ViewController.h */,
 				4385D73519F0BB1C00546A65 /* ViewController.m */,
 				4385D73719F0BB1C00546A65 /* Main.storyboard */,
+				437A8B361A093BC7007088CB /* axisLabel.h */,
+				437A8B371A093BC7007088CB /* axisLabel.m */,
 				4385D73A19F0BB1C00546A65 /* Images.xcassets */,
 				4385D73C19F0BB1C00546A65 /* LaunchScreen.xib */,
 				4385D73119F0BB1C00546A65 /* testMaintainObject.xcdatamodeld */,
 				4320817D1A003FEC00D492D8 /* maintainLabel.h */,
 				4320817E1A003FEC00D492D8 /* maintainLabel.m */,
+				437A8B331A0937D8007088CB /* labelVM.h */,
+				437A8B341A0937D8007088CB /* labelVM.m */,
 				437E989A1A0378F8000491ED /* blueView.h */,
 				437E989B1A0378F8000491ED /* blueView.m */,
 				438EBAB51A02EEE900949C6B /* blueViewModel.h */,
@@ -268,6 +278,7 @@
 				437E98991A0306C4000491ED /* radiusSlider.m in Sources */,
 				437E989C1A0378F8000491ED /* blueView.m in Sources */,
 				438EBABA1A02EEFC00949C6B /* radiusSliderModel.m in Sources */,
+				437A8B351A0937D8007088CB /* labelVM.m in Sources */,
 				4385D73019F0BB1C00546A65 /* AppDelegate.m in Sources */,
 				4385D73619F0BB1C00546A65 /* ViewController.m in Sources */,
 				436696101A02156F002A96CF /* aViewModel.m in Sources */,
@@ -275,6 +286,7 @@
 				4385D75519F0BB4D00546A65 /* maintainObject.m in Sources */,
 				438EBAB71A02EEE900949C6B /* blueViewModel.m in Sources */,
 				4385D72D19F0BB1C00546A65 /* main.m in Sources */,
+				437A8B381A093BC7007088CB /* axisLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

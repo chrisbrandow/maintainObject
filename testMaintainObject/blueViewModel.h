@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-@import UIKit;
 #import "maintainObject.h"
 
 @interface blueViewModel : maintainObject

@@ -12,12 +12,13 @@
 
 - (void)configureWithModel:(radiusSliderModel *)modelObject {
     
-    modelObject.maxValue = self.maximumValue;
-    modelObject.currentValue = self.value;
-    modelObject.minValue = self.minimumValue;
+    
+    [modelObject setValue:@(self.maximumValue) forKey:propertyKeyPath(maxValue)];
+    [modelObject setValue:@(self.value) forKey:propertyKeyPath(currentValue)];
+    [modelObject setValue:@(self.minimumValue) forKey:propertyKeyPath(minValue)];
     
     [modelObject withOwner:self maintainWithModel:^(id owner, radiusSliderModel *model) {
-        NSLog(@"hello 3rd block");
+//        NSLog(@"hello 3rd block");
 
         radiusSlider *s = (radiusSlider *)owner;
         s.value = [model currentValue];
