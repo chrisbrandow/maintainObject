@@ -74,10 +74,16 @@
 
 - (void)setInitialViewModelRelationships {
     
-    
+    //set demoView properties based on sliders
     [self.radiusSliderVM withChangeInPropertiesUpdateObject:self.demoViewModel withBlock:^(id dependentObject, id model) {
         [dependentObject setVmRadius:[model currentValue]];
     }];
+    
+    [self.cornerRadiusSliderVM withChangeInPropertiesUpdateObject:self withBlock:^(id dependentObject, id model) {
+        [[dependentObject demoViewModel] setVmCornerRadius:[model currentValue]];
+    }];
+    
+    //modify second slider max value so that it is always <= 1/2 of the view's "radius"
     
     [self.radiusSliderVM withChangeInPropertiesUpdateObject:self.cornerRadiusSliderVM withBlock:^(id dependentObject, id model) {
         sliderModel *crVM = (sliderModel *)dependentObject;
@@ -89,24 +95,27 @@
         }
     }];
     
-    [self.cornerRadiusSliderVM withChangeInPropertiesUpdateObject:self withBlock:^(id dependentObject, id model) {
-        [[dependentObject demoViewModel] setVmCornerRadius:[model currentValue]];
-    }];
-    
+    //when corner radius
     [self.cornerRadiusSliderVM withChangeInPropertiesUpdateObject:self.crMinLabelVM withBlock:^(id dependentObject, id model) {
-        [dependentObject setVmText:[NSString stringWithFormat:@"%.0f",[model maxValue]] ];
+//        [dependentObject setVmText:[NSString stringWithFormat:@"%.0f",[model maxValue]] ];
     }];
     
     [self.radiusSliderVM whenPropertyChanges:propertyKeyPath(currentValue) updateObject:self.crMinLabelVM withBlock:^(id dependentObject, id model) {
-        [dependentObject setVmBackgroundColor:[UIColor redColor]];
-    }];
-    
-    [self.cornerRadiusSliderVM whenPropertyChanges:propertyKeyPath(currentValue) updateObject:self.cornerRadiusSliderVM withBlock:^(id dependentObject, id model) {
-        [dependentObject setVmTintColor:[UIColor redColor]];
+//        [dependentObject setVmBackgroundColor:[UIColor redColor]];
     }];
     
     [self.cornerRadiusSliderVM whenPropertyChanges:propertyKeyPath(maxValue) updateObject:self.cornerRadiusSliderVM withBlock:^(id dependentObject, id model) {
+        [dependentObject setVmTintColor:[UIColor redColor]];
+    }];
+
+    [self.cornerRadiusSliderVM whenPropertyChanges:propertyKeyPath(maxValue) updateObject:self.crMinLabelVM withBlock:^(id dependentObject, id model) {
+            [dependentObject setVmText:[NSString stringWithFormat:@"%.0f",[model maxValue]] ];
+
+    }];
+    [self.cornerRadiusSliderVM whenPropertyChanges:propertyKeyPath(maxValue) updateObject:self.cornerRadiusSliderVM withBlock:^(id dependentObject, id model) {
+        sliderModel *crVM = (sliderModel *)dependentObject;
         [dependentObject setVmTintColor:[UIColor orangeColor]];
+
     }];
 
 }
