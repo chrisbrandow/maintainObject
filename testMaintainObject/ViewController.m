@@ -104,6 +104,10 @@
     [self.cornerRadiusSliderVM whenPropertyChanges:propertyKeyPath(currentValue) updateObject:self.cornerRadiusSliderVM withBlock:^(id dependentObject, id model) {
         [dependentObject setVmTintColor:[UIColor redColor]];
     }];
+    
+    [self.cornerRadiusSliderVM whenPropertyChanges:propertyKeyPath(maxValue) updateObject:self.cornerRadiusSliderVM withBlock:^(id dependentObject, id model) {
+        [dependentObject setVmTintColor:[UIColor orangeColor]];
+    }];
 
 }
 
