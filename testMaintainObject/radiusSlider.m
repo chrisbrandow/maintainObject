@@ -10,21 +10,23 @@
 
 @implementation radiusSlider
 
-- (void)configureWithModel:(radiusSliderModel *)modelObject {
+- (void)configureWithModel:(sliderModel *)modelObject {
     
     
     [modelObject setValue:@(self.maximumValue) forKey:propertyKeyPath(maxValue)];
     [modelObject setValue:@(self.value) forKey:propertyKeyPath(currentValue)];
     [modelObject setValue:@(self.minimumValue) forKey:propertyKeyPath(minValue)];
     
-    [modelObject withOwner:self maintainWithModel:^(id owner, radiusSliderModel *model) {
+//    [modelObject withOwner:self maintainWithModel:^(id owner, radiusSliderModel *model) {
+    [modelObject withChangeInPropertiesUpdateObject:self withBlock:^(id dependentObject, id model) {
+    
 //        NSLog(@"hello 3rd block");
 
-        radiusSlider *s = (radiusSlider *)owner;
+        radiusSlider *s = (radiusSlider *)dependentObject;
         s.value = [model currentValue];
         s.maximumValue = [model maxValue];
         s.minimumValue = [model minValue];
-        
+        s.tintColor = [model vmTintColor];
     }];
 }
 @end

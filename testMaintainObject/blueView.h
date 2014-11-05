@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "blueViewModel.h"
+#import "UIViewModel.h"
 
 @interface blueView : UIView
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *widthConstraint;
 
-- (void)configureWithModel:(blueViewModel *)modelObject;
+- (void)configureWithModel:(UIViewModel *)modelObject;
 
 @end

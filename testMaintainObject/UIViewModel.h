@@ -1,5 +1,5 @@
 //
-//  radiusSliderModel.h
+//  blueViewModel.h
 //  testMaintainObject
 //
 //  Created by Chris Personal on 10/30/14.
@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "maintainObject.h"
 
-@interface radiusSliderModel : maintainObject
+@interface UIViewModel : maintainObject
 
-@property (nonatomic) CGFloat maxValue;
-@property (nonatomic) CGFloat minValue;
-@property (nonatomic) CGFloat currentValue;
+@property (nonatomic) CGFloat vmCornerRadius;
+@property (nonatomic) CGFloat vmRadius;
+@property (nonatomic) UIColor *vmColor;
 
 @end

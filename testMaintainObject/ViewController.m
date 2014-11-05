@@ -8,22 +8,19 @@
 
 #import "ViewController.h"
 #import "maintainObject.h"
-#import "subClassMaintain.h"
-#import "maintainLabel.h"
-#import "aViewModel.h"
-#import "labelVM.h"
+#import "UILabelVM.h"
 #import "axisLabel.h"
-#import "radiusSliderModel.h"
+#import "sliderModel.h"
 #import "radiusSlider.h"
-#import "blueViewModel.h"
+#import "UIViewModel.h"
 #import "blueView.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *button;
 
-@property (nonatomic) radiusSliderModel *radiusSliderVM;
-@property (nonatomic) radiusSliderModel *cornerRadiusSliderVM;
-@property ( nonatomic) blueViewModel *demoViewModel;
+@property (nonatomic) sliderModel *radiusSliderVM;
+@property (nonatomic) sliderModel *cornerRadiusSliderVM;
+@property ( nonatomic) UIViewModel *demoViewModel;
 
 @property (weak, nonatomic) IBOutlet blueView *demoView;
 @property (weak, nonatomic) IBOutlet radiusSlider *radiusSlider;
@@ -38,7 +35,7 @@
 @property (weak, nonatomic) IBOutlet axisLabel *cornerRadiusMinLabel;
 @property (weak, nonatomic) IBOutlet axisLabel *cornerRadiusMaxLabel;
 
-@property (nonatomic) labelVM *crMinLabelVM;
+@property (nonatomic) UILabelVM *crMinLabelVM;
 
 
 @end
@@ -53,35 +50,14 @@
     
     self.colors = @[[UIColor redColor],[UIColor orangeColor],[UIColor yellowColor],[UIColor greenColor],[UIColor blueColor],[UIColor purpleColor]];
 
-    self.radiusSliderVM = [[radiusSliderModel alloc] init];
-    self.cornerRadiusSliderVM = [[radiusSliderModel alloc] init];
-    self.demoViewModel = [[blueViewModel alloc] init];
-    self.crMinLabelVM = [[labelVM alloc] init];
-//    labelVM *rMinLabelVM = [[labelVM alloc] init];
-    
-    
-    [self.radiusSliderVM withValueChangeUpdateObject:self.demoViewModel withBlock:^(id dependentObject, id model) {
-        [dependentObject setVmRadius:[model currentValue]];
-    }];
-    
-    [self.radiusSliderVM withValueChangeUpdateObject:self.cornerRadiusSliderVM withBlock:^(id dependentObject, id model) {
-        radiusSliderModel *crVM = (radiusSliderModel *)dependentObject;
 
-        crVM.maxValue = [model currentValue]/2;
-
-        if ([dependentObject currentValue] > [model currentValue]/2) {
-            [dependentObject setValue:@([model currentValue]/2) forKey:propertyKeyPath(currentValue)];
-            
-        }
-    }];
+    self.radiusSliderVM = [sliderModel new];
     
-    [self.cornerRadiusSliderVM withValueChangeUpdateObject:self withBlock:^(id dependentObject, id model) {
-        [[dependentObject demoViewModel] setVmCornerRadius:[model currentValue]];
-    }];
+    self.cornerRadiusSliderVM = [sliderModel new];
+    self.demoViewModel = [UIViewModel new];
+    self.crMinLabelVM = [UILabelVM new];
 
-    [self.cornerRadiusSliderVM withValueChangeUpdateObject:self.crMinLabelVM withBlock:^(id dependentObject, id model) {
-        [dependentObject setVmText:[NSString stringWithFormat:@"%.0f",[model maxValue]] ];
-    }];
+    [self setInitialViewModelRelationships];
     
     [self.cornerRadiusMaxLabel configureWithModel:self.crMinLabelVM];
     [self.demoView configureWithModel:self.demoViewModel];
@@ -90,26 +66,73 @@
     
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    
+    self.crMinLabelVM.vmCornerRadius = 5;
+    self.cornerRadiusSliderVM.vmTintColor = [UIColor blueColor];
+}
+
+- (void)setInitialViewModelRelationships {
+    
+    
+    [self.radiusSliderVM withChangeInPropertiesUpdateObject:self.demoViewModel withBlock:^(id dependentObject, id model) {
+        [dependentObject setVmRadius:[model currentValue]];
+    }];
+    
+    [self.radiusSliderVM withChangeInPropertiesUpdateObject:self.cornerRadiusSliderVM withBlock:^(id dependentObject, id model) {
+        sliderModel *crVM = (sliderModel *)dependentObject;
+        
+        crVM.maxValue = [model currentValue]/2;
+        
+        if ([dependentObject currentValue] > [model currentValue]/2) {
+            [dependentObject setValue:@([model currentValue]/2) forKey:propertyKeyPath(currentValue)];
+        }
+    }];
+    
+    [self.cornerRadiusSliderVM withChangeInPropertiesUpdateObject:self withBlock:^(id dependentObject, id model) {
+        [[dependentObject demoViewModel] setVmCornerRadius:[model currentValue]];
+    }];
+    
+    [self.cornerRadiusSliderVM withChangeInPropertiesUpdateObject:self.crMinLabelVM withBlock:^(id dependentObject, id model) {
+        [dependentObject setVmText:[NSString stringWithFormat:@"%.0f",[model maxValue]] ];
+    }];
+    
+    [self.radiusSliderVM whenPropertyChanges:propertyKeyPath(currentValue) updateObject:self.crMinLabelVM withBlock:^(id dependentObject, id model) {
+        [dependentObject setVmBackgroundColor:[UIColor redColor]];
+    }];
+    
+    [self.cornerRadiusSliderVM whenPropertyChanges:propertyKeyPath(currentValue) updateObject:self.cornerRadiusSliderVM withBlock:^(id dependentObject, id model) {
+        [dependentObject setVmTintColor:[UIColor redColor]];
+    }];
+
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)radiusSliderUpdated:(id)sender {
     UISlider *s = (UISlider *)sender;
-//    self.radiusSliderVM.currentValue = s.value;
-    [self.radiusSliderVM setValue:@(s.value) forKey:propertyKeyPath(currentValue)];
-    
+    self.radiusSliderVM.currentValue = s.value;
 }
 - (IBAction)cornerRadiusSliderUpdated:(id)sender {
 
     UISlider *s = (UISlider *)sender;
-//    self.cornerRadiusSliderVM.currentValue = s.value;
-    [self.cornerRadiusSliderVM setValue:@(s.value) forKey:propertyKeyPath(currentValue)];
+    self.cornerRadiusSliderVM.currentValue = s.value;
+
 }
 
 - (IBAction)segmentedControllerUpdated:(id)sender {
     UISegmentedControl *sc = (UISegmentedControl *)sender;
     self.demoViewModel.vmColor = self.colors[sc.selectedSegmentIndex];
+}
+- (IBAction)radiusSliderFinishedWithRadius:(id)sender {
+    self.crMinLabelVM.vmBackgroundColor = [UIColor whiteColor];
+
+}
+- (IBAction)cornerRadiusSliderFinished:(id)sender {
+    self.cornerRadiusSliderVM.vmTintColor =[UIColor blueColor];
+
 }
 
 @end

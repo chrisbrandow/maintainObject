@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Flouu Apps. All rights reserved.
 //
 
-#import "radiusSliderModel.h"
+#import "sliderModel.h"
 
-@implementation radiusSliderModel
+@implementation sliderModel
 
 @end

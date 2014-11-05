@@ -8,13 +8,12 @@
 
 #import "maintainObject.h"
 
-@interface labelVM : maintainObject <NSCoding>
+@interface UILabelVM : maintainObject
 
 @property (nonatomic) CGRect vmFrame;
 @property (nonatomic) NSString *vmText;
 @property (nonatomic) UIColor *vmTextColor;
 @property (nonatomic) UIColor *vmBackgroundColor;
-
-@property (nonatomic, readonly) IBOutlet UILabel *boundLabel;
+@property (nonatomic) CGFloat vmCornerRadius;
 
 @end

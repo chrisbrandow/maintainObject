@@ -11,15 +11,16 @@
 
 @implementation blueView
 
-- (void)configureWithModel:(blueViewModel *)modelObject {
+- (void)configureWithModel:(UIViewModel *)modelObject {
     
     modelObject.vmRadius = self.widthConstraint.constant;
     modelObject.vmColor = self.backgroundColor;
     modelObject.vmCornerRadius = self.layer.cornerRadius;
     
-    [modelObject withOwner:self maintainWithModel:^(id owner, id model) {
-        blueViewModel *vm = model;
-        blueView *v = (blueView *)owner;
+    [modelObject withChangeInPropertiesUpdateObject:self withBlock:^(id dependentObject, id model) {
+        
+        UIViewModel *vm = model;
+        blueView *v = (blueView *)dependentObject;
         
         v.layer.cornerRadius = vm.vmCornerRadius;
         v.widthConstraint.constant = vm.vmRadius;

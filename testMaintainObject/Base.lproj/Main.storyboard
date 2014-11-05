@@ -59,12 +59,14 @@
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="0.0" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="C2a-ix-daR" customClass="radiusSlider">
                                 <rect key="frame" x="24" y="389" width="552" height="31"/>
                                 <connections>
+                                    <action selector="cornerRadiusSliderFinished:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="yhy-eB-jut"/>
                                     <action selector="cornerRadiusSliderUpdated:" destination="vXZ-lx-hvc" eventType="valueChanged" id="J3W-H0-Bjn"/>
                                 </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="EoH-hY-vY5" customClass="radiusSlider">
                                 <rect key="frame" x="24" y="270" width="552" height="31"/>
                                 <connections>
+                                    <action selector="radiusSliderFinishedWithRadius:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="M0M-vv-gcS"/>
                                     <action selector="radiusSliderUpdated:" destination="vXZ-lx-hvc" eventType="valueChanged" id="Pj1-bs-0oz"/>
                                 </connections>
                             </slider>

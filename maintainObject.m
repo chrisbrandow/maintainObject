@@ -9,7 +9,10 @@
 #import "maintainObject.h"
 #import <objc/runtime.h> 
 
-@interface maintainObject ()
+@interface maintainObject () {
+    NSMapTable *_maintenanceBlocksByOwner;
+    NSMutableDictionary *_maintenanceBlocksByKey;
+}
 
 @end
 
@@ -20,6 +23,7 @@
     
     if (self) {
         _maintenanceBlocksByOwner = [NSMapTable weakToStrongObjectsMapTable];
+        _maintenanceBlocksByKey = [NSMutableDictionary new];
         [self setupObservingWithKeys:[[self class] keysFromProperties]];
 
     }
@@ -27,7 +31,30 @@
     return self;
 }
 
-- (void)withValueChangeUpdateObject:(id)weaklyHeldOwner withBlock:(void (^)(id dependentObject, id model))maintenanceBlock {
+- (void)whenPropertyChanges:(NSString *)propertyName updateObject:(id)weaklyHeldOwner withBlock:(void (^)(id dependentObject, id model))maintenanceBlock {
+    NSAssert([[[self class] keysFromProperties] containsObject:propertyName], @"oops, your key is not a property in this model");
+    NSLog(@"has this in props: %zd, %@, %@",[[[self class] keysFromProperties] containsObject:propertyName], propertyName, [[self class] keysFromProperties]);
+    NSMapTable *maintenanceBlocksByOwnerKey = [_maintenanceBlocksByKey objectForKey:propertyName]; //=
+    
+    if (!maintenanceBlocksByOwnerKey) {
+        maintenanceBlocksByOwnerKey = [NSMapTable weakToStrongObjectsMapTable];
+        [_maintenanceBlocksByKey setObject:maintenanceBlocksByOwnerKey forKey:propertyName];
+    }
+    
+    NSMutableArray *maintenanceBlocksForOwner = [maintenanceBlocksByOwnerKey objectForKey:weaklyHeldOwner];
+    if (!maintenanceBlocksForOwner) {
+        maintenanceBlocksForOwner = [NSMutableArray array];
+        [maintenanceBlocksByOwnerKey setObject:maintenanceBlocksForOwner forKey:weaklyHeldOwner];
+    }
+    
+    __weak id weakSelf = self;
+    [maintenanceBlocksForOwner addObject:maintenanceBlock];
+
+    //    NSLog(@"owner keys: %@", [[_maintenanceBlocksByOwner keyEnumerator] allObjects]);
+    maintenanceBlock(weaklyHeldOwner, weakSelf);
+
+}
+- (void)withChangeInPropertiesUpdateObject:(id)weaklyHeldOwner withBlock:(void (^)(id dependentObject, id model))maintenanceBlock {
     [self withOwner:weaklyHeldOwner maintainWithModel:maintenanceBlock];
 }
 
@@ -45,28 +72,34 @@
     maintenanceBlock(weaklyHeldOwner, weakSelf);
 }
 
-- (void)callTheBlock {
+-(void)setupObservingWithKeys:(NSArray *)keys {
+    [keys enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        
+        [self addObserver:self forKeyPath:obj options:NSKeyValueObservingOptionNew context:NULL];
+    }];
     
-    for (id owner in _maintenanceBlocksByOwner) {
+    
+}
+
+- (void)callMaintenanceBlocksTable:(NSMapTable *)blocksTable {
+    
+    for (id owner in blocksTable) {
         
         for (void (^maintenanceBlock)(id owner, id model) in
-             [_maintenanceBlocksByOwner objectForKey:owner]) {
+             [blocksTable objectForKey:owner]) {
             maintenanceBlock(owner, self);
         }
     }
 }
 
--(void)setupObservingWithKeys:(NSArray *)keys {
-    [keys enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [self addObserver:self forKeyPath:obj options:NSKeyValueObservingOptionNew context:NULL];
-    }];
-}
-
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
 
-    if ([self respondsToSelector:@selector(callTheBlock)]) {
-        [self performSelector:@selector(callTheBlock)];
+    if ([[_maintenanceBlocksByKey allKeys] containsObject:keyPath]) {
+        //call the blocks by key
+        [self callMaintenanceBlocksTable:[_maintenanceBlocksByKey objectForKey:keyPath]];
     }
+    
+    [self callMaintenanceBlocksTable:_maintenanceBlocksByOwner];
     
 }
 
