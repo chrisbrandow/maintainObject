@@ -15,4 +15,5 @@
 @property (nonatomic) CGFloat minValue;
 @property (nonatomic) CGFloat currentValue;
 @property (nonatomic) UIColor *vmTintColor;
+
 @end

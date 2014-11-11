@@ -17,11 +17,8 @@
     [modelObject setValue:@(self.value) forKey:propertyKeyPath(currentValue)];
     [modelObject setValue:@(self.minimumValue) forKey:propertyKeyPath(minValue)];
     
-//    [modelObject withOwner:self maintainWithModel:^(id owner, radiusSliderModel *model) {
     [modelObject withChangeInPropertiesUpdateObject:self withBlock:^(id dependentObject, id model) {
     
-//        NSLog(@"hello 3rd block");
-
         radiusSlider *s = (radiusSlider *)dependentObject;
         s.value = [model currentValue];
         s.maximumValue = [model maxValue];

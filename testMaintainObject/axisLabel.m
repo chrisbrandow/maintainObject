@@ -13,14 +13,11 @@
 
 - (void)configureWithModel:(UILabelVM *)modelObject {
 
-
-    
     modelObject.vmFrame = self.frame;
     modelObject.vmTextColor = self.textColor;
     modelObject.vmBackgroundColor = self.backgroundColor;
 
-    [modelObject withChangeInPropertiesUpdateObject:self withBlock:^(id dependentObject, id model) {
-
+    [modelObject updateView:self withBlock:^(id dependentObject, id model) {
         
         UILabelVM *vm = model;
         axisLabel *l = (axisLabel *)dependentObject;

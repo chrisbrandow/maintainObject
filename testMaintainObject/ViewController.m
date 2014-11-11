@@ -50,13 +50,6 @@
     
     self.colors = @[[UIColor redColor],[UIColor orangeColor],[UIColor yellowColor],[UIColor greenColor],[UIColor blueColor],[UIColor purpleColor]];
 
-
-    self.radiusSliderVM = [sliderModel new];
-    
-    self.cornerRadiusSliderVM = [sliderModel new];
-    self.demoViewModel = [UIViewModel new];
-    self.crMinLabelVM = [UILabelVM new];
-
     [self setInitialViewModelRelationships];
     
     [self.cornerRadiusMaxLabel configureWithModel:self.crMinLabelVM];
@@ -69,53 +62,67 @@
 -(void)viewWillAppear:(BOOL)animated {
     
     self.crMinLabelVM.vmCornerRadius = 5;
+    self.crMinLabelVM.vmBackgroundColor = [UIColor whiteColor];
     self.cornerRadiusSliderVM.vmTintColor = [UIColor blueColor];
+
 }
 
 - (void)setInitialViewModelRelationships {
     
-    //set demoView properties based on sliders
-    [self.radiusSliderVM withChangeInPropertiesUpdateObject:self.demoViewModel withBlock:^(id dependentObject, id model) {
+    self.radiusSliderVM = [sliderModel new];
+    self.cornerRadiusSliderVM = [sliderModel new];
+    self.demoViewModel = [UIViewModel new];
+    self.crMinLabelVM = [UILabelVM new];
+
+    //set demoViewModel properties based on any changes to sliders
+    [self.radiusSliderVM whenPropertyChanges:propertyKeyPath(currentValue) updateObject:self.demoViewModel withBlock:^(id dependentObject, id model) {
         [dependentObject setVmRadius:[model currentValue]];
     }];
     
-    [self.cornerRadiusSliderVM withChangeInPropertiesUpdateObject:self withBlock:^(id dependentObject, id model) {
-        [[dependentObject demoViewModel] setVmCornerRadius:[model currentValue]];
+    [self.cornerRadiusSliderVM whenPropertyChanges:propertyKeyPath(currentValue) updateObject:self.demoViewModel withBlock:^(id dependentObject, id model) {
+        [dependentObject setVmCornerRadius:[model currentValue]];
     }];
     
     //modify second slider max value so that it is always <= 1/2 of the view's "radius"
-    
-    [self.radiusSliderVM withChangeInPropertiesUpdateObject:self.cornerRadiusSliderVM withBlock:^(id dependentObject, id model) {
+    [self.radiusSliderVM whenPropertyChanges:propertyKeyPath(currentValue) updateObject:self.cornerRadiusSliderVM withBlock:^(id dependentObject, id model) {
+        //typecasting allows dot-syntax to be used.
         sliderModel *crVM = (sliderModel *)dependentObject;
+        CGFloat newMaxValue = [model currentValue]/2;
         
-        crVM.maxValue = [model currentValue]/2;
+        crVM.maxValue = (newMaxValue) ?: 1;
         
-        if ([dependentObject currentValue] > [model currentValue]/2) {
-            [dependentObject setValue:@([model currentValue]/2) forKey:propertyKeyPath(currentValue)];
+        if ([dependentObject currentValue] > newMaxValue) {
+            crVM.currentValue = (newMaxValue >=1) ? newMaxValue : 1;
         }
-    }];
-    
-    //when corner radius
-    [self.cornerRadiusSliderVM withChangeInPropertiesUpdateObject:self.crMinLabelVM withBlock:^(id dependentObject, id model) {
-//        [dependentObject setVmText:[NSString stringWithFormat:@"%.0f",[model maxValue]] ];
+        
     }];
     
     [self.radiusSliderVM whenPropertyChanges:propertyKeyPath(currentValue) updateObject:self.crMinLabelVM withBlock:^(id dependentObject, id model) {
-//        [dependentObject setVmBackgroundColor:[UIColor redColor]];
+        [dependentObject setVmBackgroundColor:[UIColor redColor]];
     }];
     
     [self.cornerRadiusSliderVM whenPropertyChanges:propertyKeyPath(maxValue) updateObject:self.cornerRadiusSliderVM withBlock:^(id dependentObject, id model) {
-        [dependentObject setVmTintColor:[UIColor redColor]];
+        [dependentObject setVmTintColor:([model currentValue] >= [model maxValue]) ? [UIColor redColor] : [UIColor blueColor]];
     }];
 
     [self.cornerRadiusSliderVM whenPropertyChanges:propertyKeyPath(maxValue) updateObject:self.crMinLabelVM withBlock:^(id dependentObject, id model) {
-            [dependentObject setVmText:[NSString stringWithFormat:@"%.0f",[model maxValue]] ];
+        
+        NSString *labelString = [NSString stringWithFormat:@"%.0f", ([model maxValue] > 1) ? [model maxValue] : 1];
+        [dependentObject setVmText:labelString];
 
     }];
-    [self.cornerRadiusSliderVM whenPropertyChanges:propertyKeyPath(maxValue) updateObject:self.cornerRadiusSliderVM withBlock:^(id dependentObject, id model) {
-        sliderModel *crVM = (sliderModel *)dependentObject;
-        [dependentObject setVmTintColor:[UIColor orangeColor]];
 
+    [self.radiusSliderVM whenProperty:propertyKeyPath(currentValue) startsOrStopsChanging:changeStop updateBlock:^(id dependentObject, id model) {
+        
+        self.crMinLabelVM.vmBackgroundColor = [UIColor whiteColor];
+        self.cornerRadiusSliderVM.vmTintColor = [UIColor blueColor];
+
+    }];
+    [self.radiusSliderVM whenProperty:propertyKeyPath(currentValue) startsOrStopsChanging:changeStart updateBlock:^(id dependentObject, id model) {
+        self.radiusSlider.backgroundColor = [UIColor redColor];
+        [UIView animateWithDuration:.5 animations:^{
+            self.radiusSlider.backgroundColor = [UIColor whiteColor];
+        }];
     }];
 
 }
@@ -126,13 +133,12 @@
 }
 - (IBAction)radiusSliderUpdated:(id)sender {
     UISlider *s = (UISlider *)sender;
-    self.radiusSliderVM.currentValue = s.value;
+    self.radiusSliderVM.currentValue = (s.value) ?: 1;
+    
 }
 - (IBAction)cornerRadiusSliderUpdated:(id)sender {
-
     UISlider *s = (UISlider *)sender;
     self.cornerRadiusSliderVM.currentValue = s.value;
-
 }
 
 - (IBAction)segmentedControllerUpdated:(id)sender {
@@ -140,12 +146,18 @@
     self.demoViewModel.vmColor = self.colors[sc.selectedSegmentIndex];
 }
 - (IBAction)radiusSliderFinishedWithRadius:(id)sender {
-    self.crMinLabelVM.vmBackgroundColor = [UIColor whiteColor];
+
+    [self.radiusSliderVM property:propertyKeyPath(currentValue) stopOrStartChanging:changeStop];
 
 }
-- (IBAction)cornerRadiusSliderFinished:(id)sender {
-    self.cornerRadiusSliderVM.vmTintColor =[UIColor blueColor];
 
+- (IBAction)cornerRadiusSliderFinished:(id)sender {
+
+}
+
+- (IBAction)touchedRadiusSlider:(id)sender {
+    NSLog(@"touched it");
+    [self.radiusSliderVM property:propertyKeyPath(currentValue) stopOrStartChanging:changeStart];
 }
 
 @end
