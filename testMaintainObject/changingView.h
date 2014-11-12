@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UIViewModel.h"
 
-@interface blueView : UIView
+@interface changingView : UIView
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *widthConstraint;
 

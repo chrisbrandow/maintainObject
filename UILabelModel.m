@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Flouu Apps. All rights reserved.
 //
 
-#import "UILabelVM.h"
+#import "UILabelModel.h"
 
-@implementation UILabelVM
+@implementation UILabelModel
 
 @end

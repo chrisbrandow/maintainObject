@@ -7,11 +7,11 @@
 //
 
 #import "axisLabel.h"
-#import "UILabelVM.h"
+#import "UILabelModel.h"
 
 @implementation axisLabel
 
-- (void)configureWithModel:(UILabelVM *)modelObject {
+- (void)configureWithModel:(UILabelModel *)modelObject {
 
     modelObject.vmFrame = self.frame;
     modelObject.vmTextColor = self.textColor;
@@ -19,7 +19,7 @@
 
     [modelObject updateView:self withBlock:^(id dependentObject, id model) {
         
-        UILabelVM *vm = model;
+        UILabelModel *vm = model;
         axisLabel *l = (axisLabel *)dependentObject;
         
         l.text = vm.vmText;

@@ -15,14 +15,13 @@
     
     [modelObject setValue:@(self.maximumValue) forKey:propertyKeyPath(maxValue)];
     [modelObject setValue:@(self.value) forKey:propertyKeyPath(currentValue)];
-    [modelObject setValue:@(self.minimumValue) forKey:propertyKeyPath(minValue)];
+    self.layer.cornerRadius = 5;
     
-    [modelObject withChangeInPropertiesUpdateObject:self withBlock:^(id dependentObject, id model) {
-    
+    [modelObject updateView:self withBlock:^(id dependentObject, id model) {
+        
         radiusSlider *s = (radiusSlider *)dependentObject;
         s.value = [model currentValue];
         s.maximumValue = [model maxValue];
-        s.minimumValue = [model minValue];
         s.tintColor = [model vmTintColor];
     }];
 }

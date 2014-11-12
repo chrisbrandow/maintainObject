@@ -12,7 +12,6 @@
 @interface sliderModel : maintainObject
 
 @property (nonatomic) CGFloat maxValue;
-@property (nonatomic) CGFloat minValue;
 @property (nonatomic) CGFloat currentValue;
 @property (nonatomic) UIColor *vmTintColor;
 

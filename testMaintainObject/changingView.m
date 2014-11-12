@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Flouu Apps. All rights reserved.
 //
 
-#import "blueView.h"
+#import "changingView.h"
 
 
-@implementation blueView
+@implementation changingView
 
 - (void)configureWithModel:(UIViewModel *)modelObject {
     
@@ -17,10 +17,10 @@
     modelObject.vmColor = self.backgroundColor;
     modelObject.vmCornerRadius = self.layer.cornerRadius;
     
-    [modelObject withChangeInPropertiesUpdateObject:self withBlock:^(id dependentObject, id model) {
+    [modelObject updateView:self withBlock:^(id dependentObject, id model) {
         
         UIViewModel *vm = model;
-        blueView *v = (blueView *)dependentObject;
+        changingView *v = (changingView *)dependentObject;
         
         v.layer.cornerRadius = vm.vmCornerRadius;
         v.widthConstraint.constant = vm.vmRadius;

@@ -8,7 +8,7 @@
 
 #import "maintainObject.h"
 
-@interface UILabelVM : maintainObject
+@interface UILabelModel : maintainObject
 
 @property (nonatomic) CGRect vmFrame;
 @property (nonatomic) NSString *vmText;

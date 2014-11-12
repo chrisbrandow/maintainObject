@@ -8,21 +8,21 @@
 
 #import "ViewController.h"
 #import "maintainObject.h"
-#import "UILabelVM.h"
+#import "UILabelModel.h"
 #import "axisLabel.h"
 #import "sliderModel.h"
 #import "radiusSlider.h"
 #import "UIViewModel.h"
-#import "blueView.h"
+#import "changingView.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *button;
 
 @property (nonatomic) sliderModel *radiusSliderVM;
 @property (nonatomic) sliderModel *cornerRadiusSliderVM;
-@property ( nonatomic) UIViewModel *demoViewModel;
+@property (nonatomic) UIViewModel *demoViewModel;
 
-@property (weak, nonatomic) IBOutlet blueView *demoView;
+@property (weak, nonatomic) IBOutlet changingView *demoView;
 @property (weak, nonatomic) IBOutlet radiusSlider *radiusSlider;
 @property (weak, nonatomic) IBOutlet radiusSlider *cornerRadiusSlider;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *colorSegmentedControl;
@@ -35,7 +35,7 @@
 @property (weak, nonatomic) IBOutlet axisLabel *cornerRadiusMinLabel;
 @property (weak, nonatomic) IBOutlet axisLabel *cornerRadiusMaxLabel;
 
-@property (nonatomic) UILabelVM *crMinLabelVM;
+@property (nonatomic) UILabelModel *crMinLabelVM;
 
 
 @end
@@ -72,8 +72,8 @@
     self.radiusSliderVM = [sliderModel new];
     self.cornerRadiusSliderVM = [sliderModel new];
     self.demoViewModel = [UIViewModel new];
-    self.crMinLabelVM = [UILabelVM new];
-
+    self.crMinLabelVM = [UILabelModel new];
+    
     //set demoViewModel properties based on any changes to sliders
     [self.radiusSliderVM whenPropertyChanges:propertyKeyPath(currentValue) updateObject:self.demoViewModel withBlock:^(id dependentObject, id model) {
         [dependentObject setVmRadius:[model currentValue]];
@@ -124,18 +124,14 @@
             self.radiusSlider.backgroundColor = [UIColor whiteColor];
         }];
     }];
-
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 - (IBAction)radiusSliderUpdated:(id)sender {
     UISlider *s = (UISlider *)sender;
     self.radiusSliderVM.currentValue = (s.value) ?: 1;
     
 }
+
 - (IBAction)cornerRadiusSliderUpdated:(id)sender {
     UISlider *s = (UISlider *)sender;
     self.cornerRadiusSliderVM.currentValue = s.value;
@@ -145,18 +141,12 @@
     UISegmentedControl *sc = (UISegmentedControl *)sender;
     self.demoViewModel.vmColor = self.colors[sc.selectedSegmentIndex];
 }
+
 - (IBAction)radiusSliderFinishedWithRadius:(id)sender {
-
     [self.radiusSliderVM property:propertyKeyPath(currentValue) stopOrStartChanging:changeStop];
-
-}
-
-- (IBAction)cornerRadiusSliderFinished:(id)sender {
-
 }
 
 - (IBAction)touchedRadiusSlider:(id)sender {
-    NSLog(@"touched it");
     [self.radiusSliderVM property:propertyKeyPath(currentValue) stopOrStartChanging:changeStart];
 }
 

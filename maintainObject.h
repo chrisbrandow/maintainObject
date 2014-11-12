@@ -16,7 +16,7 @@ typedef enum valueChange : NSUInteger {
 
 //H/T to g8productions
 #define propertyKeyPath(property) (@""#property)
-#define propertyKeyPathLastComponent(property) [[(@""#property) componentsSeparatedByString:@"."] lastObject]
+#define propertyComponent(property) [[(@""#property) componentsSeparatedByString:@"."] lastObject]
 
 @interface maintainObject : NSObject
 
