@@ -41,9 +41,7 @@
 @end
 
 @implementation ViewController
-- (IBAction)buttonAction:(id)sender {
 
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
