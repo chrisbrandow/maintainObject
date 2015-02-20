@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "maintainObject.h"
+#import "binderObject.h"
 
-@interface sliderModel : maintainObject
+@interface sliderBinder : binderObject
 
 @property (nonatomic) CGFloat maxValue;
 @property (nonatomic) CGFloat currentValue;

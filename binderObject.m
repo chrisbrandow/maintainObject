@@ -6,20 +6,21 @@
 //  Copyright (c) 2014 Flouu Apps. All rights reserved.
 //
 
-#import "maintainObject.h"
+#import "binderObject.h"
 #import <objc/runtime.h> 
 
-@interface maintainObject () {
+@interface binderObject () {
     NSMapTable *_maintenanceBlocksByOwner;
     NSMutableDictionary *_maintenanceBlocksByKey;
 }
 
 @end
 
-@implementation maintainObject
+@implementation binderObject
 
 - (id)init {
     self = [super init];
+    NSLog(@"super class %@", [self.superclass class]);
     
     if (self) {
         _maintenanceBlocksByOwner = [NSMapTable weakToStrongObjectsMapTable];
@@ -34,7 +35,9 @@
     NSAssert([[[self class] keysFromProperties] containsObject:propertyName], @"oops, your key is not a property in this model");
     [self whenPropertyChanges:propertyName internalUpdateObject:weaklyHeldOwner withBlock:maintenanceBlock];
 }
-
+- (void)bind:(id)boundObject toProperty:(NSString *)propertyName InBlock:(void (^)(id, id))maintenanceBlock {
+    [self whenPropertyChanges:propertyName updateObject:boundObject withBlock:maintenanceBlock];
+}
 - (void)whenPropertyChanges:(NSString *)propertyName internalUpdateObject:(id)weaklyHeldOwner withBlock:(void (^)(id dependentObject, id model))maintenanceBlock {
 
     NSMapTable *maintenanceBlocksByOwnerKey = [_maintenanceBlocksByKey objectForKey:propertyName]; //=

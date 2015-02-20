@@ -15,10 +15,16 @@ typedef enum valueChange : NSUInteger {
 } valueChange;
 
 //H/T to g8productions
-#define propertyKeyPath(property) (@""#property)
-#define propertyComponent(property) [[(@""#property) componentsSeparatedByString:@"."] lastObject]
+#define keyPath(property) (@""#property)
+#define objProperty(property) [[(@""#property) componentsSeparatedByString:@"."] lastObject]
 
-@interface maintainObject : NSObject
+@interface binderObject : NSObject
+- (void)bind:(id)boundObject toPropertiesInBlock:(void (^)(id boundObject, id model))maintenanceBlock;
+- (void)bind:(id)boundObject toProperty:(NSString *)propertyName InBlock:(void (^)(id, id))maintenanceBlock;
+- (void)bindView:(UIView *)view toPropertiesInBlock:(void (^)(id boundObject, id model))maintenanceBlock;
+//imperatively trigger an initiate or terminate block
+- (void)property:(NSString *)propertyName startOrStopped:(valueChange)change;
+- (void)whenProperty:(NSString *)propertyName changesBy:(valueChange)startOrStop updateBlock:(void (^)(id boundObject, id model))maintenanceBlock;
 
 - (void)withChangeInPropertiesUpdateObject:(id)weaklyHeldOwner withBlock:(void (^)(id dependentObject, id model))maintenanceBlock;
 - (void)whenPropertyChanges:(NSString *)propertyName updateObject:(id)weaklyHeldOwner withBlock:(void (^)(id dependentObject, id model))maintenanceBlock;

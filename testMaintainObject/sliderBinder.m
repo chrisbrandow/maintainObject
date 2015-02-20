@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Flouu Apps. All rights reserved.
 //
 
-#import "sliderModel.h"
+#import "sliderBinder.h"
 
-@implementation sliderModel
+@implementation sliderBinder
 
 @end

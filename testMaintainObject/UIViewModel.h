@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "maintainObject.h"
+#import "binderObject.h"
 
-@interface UIViewModel : maintainObject
+@interface UIViewModel : binderObject
 
 @property (nonatomic) CGFloat vmCornerRadius;
 @property (nonatomic) CGFloat vmRadius;

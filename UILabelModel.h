@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Flouu Apps. All rights reserved.
 //
 
-#import "maintainObject.h"
+#import "binderObject.h"
 
-@interface UILabelModel : maintainObject
+@interface UILabelModel : binderObject
 
 @property (nonatomic) CGRect vmFrame;
 @property (nonatomic) NSString *vmText;
